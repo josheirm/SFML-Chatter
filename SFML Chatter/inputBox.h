@@ -8,15 +8,18 @@
 
 //Button Button;
 
-
+typedef std::shared_ptr< tgui::TextBox >ConstPtrTextBox;
 
 //typedef std::shared_ptr< Button >Ptr;
 class input_Box
 {
 public:
 	tgui::Button button_;
-	tgui::TextBox  Text_Box;
+	tgui::TextBox text_Box;
+	ConstPtrTextBox  inputText;
 
+	int checkButtonPressed();
+	void eraseText();
 	const sf::String &	text = "";
 	//static tgui::Button::Ptr tgui::Button::create(text);
 
@@ -29,7 +32,7 @@ public:
 	
 
 	
-	void eraseTextonReturn();
+	//void eraseText();
 
 	input_Box();
 	~input_Box();

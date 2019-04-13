@@ -62,6 +62,12 @@ int main()
 			gui.handleEvent(event); // Pass the event to the widgets
 		}
 
+		//int ispressed = inputBox.checkButtonPressed();
+
+
+
+
+
 		window.clear();
 		gui.draw(); // Draw all widgets
 		window.display();
