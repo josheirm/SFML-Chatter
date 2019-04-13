@@ -1,50 +1,27 @@
-#include "Keyboard.h"
+#include <TGUI/TGUI.hpp>
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 #include <SFML/Window.hpp>
-//#include <SFML/Graphics.hpp>
-//#include <vector>
+//#include <SFML/Main.hpp>
 
-
-Keyboard::Keyboard()
+int WinMain()
 {
-	if (!font.loadFromFile("arial.ttf"))
+	sf::RenderWindow window{ {800, 600}, "Window" };
+	tgui::Gui gui{ window }; // Create the gui and attach it to the window
+
+	while (window.isOpen())
 	{
-		fprintf(stderr, "error!\n");
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+
+			gui.handleEvent(event); // Pass the event to the widgets
+		}
+
+		window.clear();
+		gui.draw(); // Draw all widgets
+		window.display();
 	}
-
-	text.setFont(font);
-	chatString = { NULL };
-	sendIt = 0;
-	
-}
-
-
-Keyboard::~Keyboard()
-{
-}
-
-
-int Keyboard::getKey()
-{
-	// TODO: Add your implementation code here.
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-	{
-		chatString = chatString + "A";
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::B))
-	{
-		chatString = chatString + "B";
-	}
-	
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C))
-	{
-		chatString = chatString + "C";
-	}
-	
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-	{
-		sendIt = 1;
-	}
-	
-
-	return 0;
 }

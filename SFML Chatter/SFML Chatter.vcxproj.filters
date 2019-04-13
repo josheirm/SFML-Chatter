@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\My Repos2\SFML_CHATTER\chatter.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Keyboard.cpp">
+    <ClCompile Include="inputBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Keyboard.h">
+    <ClInclude Include="inputBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
