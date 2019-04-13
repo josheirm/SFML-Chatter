@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="chatBox.cpp" />
     <ClCompile Include="inputBox.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="chatBox.h" />
     <ClInclude Include="inputBox.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

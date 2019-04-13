@@ -21,9 +21,15 @@
     <ClCompile Include="inputBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="chatBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inputBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chatBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

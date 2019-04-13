@@ -18,8 +18,8 @@ void input_Box::drawWindow(tgui::Gui& gui)
 
 
 	inputText = text_Box.create();
-	inputText->setSize({ "300", "100" });
-	inputText->setPosition({ "16.67%", "16.67%" });
+	inputText->setSize({ "500", "100" });
+	inputText->setPosition({ "100", "100" });
 	//editBoxUsername->setDefaultText("Username");
 	//inputText->setText("a");
 	gui.add(inputText);

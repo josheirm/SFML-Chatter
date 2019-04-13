@@ -1,6 +1,7 @@
 #include <TGUI/TGUI.hpp>
 #include <iostream>
 #include "inputBox.h"
+#include "chatBox.h"
 
 void loadWidgets(tgui::Gui& gui)
 {
@@ -24,14 +25,15 @@ void loadWidgets(tgui::Gui& gui)
 }
 
 input_Box * inputBox = new input_Box();
+chat_Box * chatBox = new chat_Box();
 
 int main()
 {
-	sf::RenderWindow window{ {400, 400}, "Window" };
+	sf::RenderWindow window{ {700, 600}, "Window" };
 	tgui::Gui gui{ window }; // Create the gui and attach it to the window
 
 	input_Box().drawWindow(gui);
-	
+	chat_Box().drawChatBox(gui);
 	
 	
 
