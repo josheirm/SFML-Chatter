@@ -70,6 +70,7 @@ void input_Box::eraseText()
 {
 	sf::String text1 = "";
 	inputText->setText(text1);
+	chat_Box.addTexttoChatBox();// addLine();
 }
 
 

@@ -24,8 +24,9 @@ void loadWidgets(tgui::Gui& gui)
 	gui.add(editBoxUsername);
 }
 
+//chat_Box * chatBox = new chat_Box();
 input_Box * inputBox = new input_Box();
-chat_Box * chatBox = new chat_Box();
+
 
 int main()
 {
@@ -33,7 +34,8 @@ int main()
 	tgui::Gui gui{ window }; // Create the gui and attach it to the window
 
 	input_Box().drawWindow(gui);
-	chat_Box().drawChatBox(gui);
+	input_Box().chat_Box.drawChatBox(gui);
+	
 	
 	
 

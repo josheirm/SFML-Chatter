@@ -4,12 +4,13 @@
 
 chat_Box::chat_Box()
 {
+	chatbox = tgui::ChatBox::create();
 }
 
 void chat_Box::drawChatBox(tgui::Gui& gui)
 {
 	{
-		auto chatbox = tgui::ChatBox::create();
+		
 		//chatbox->setRenderer(theme.getRenderer("ChatBox"));
 		chatbox->setSize(500, 200);
 		chatbox->setTextSize(18);
@@ -20,8 +21,7 @@ void chat_Box::drawChatBox(tgui::Gui& gui)
 		chatbox->addLine("texus: Thanks! :)", sf::Color::Green);
 		chatbox->addLine("Me: The widgets rock ^^", sf::Color::Yellow);
 		gui.add(chatbox);
-
-
+		
 
 
 	}
@@ -31,4 +31,10 @@ void chat_Box::drawChatBox(tgui::Gui& gui)
 
 chat_Box::~chat_Box()
 {
+}
+
+void chat_Box::addTexttoChatBox()
+{
+	chatbox->addLine("test",  sf::Color::Green);
+
 }

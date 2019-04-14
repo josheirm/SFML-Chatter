@@ -5,7 +5,8 @@
 #include <TGUI/Widgets/Button.hpp>
 //#include <TGUI/Text.hpp>
 #include <TGUI/Widgets/TextBox.hpp>
-
+#include <TGUI/Widgets/ChatBox.hpp>
+#include "chatBox.h"
 //Button Button;
 
 typedef std::shared_ptr< tgui::TextBox >ConstPtrTextBox;
@@ -17,6 +18,7 @@ public:
 	tgui::Button button_;
 	tgui::TextBox text_Box;
 	ConstPtrTextBox  inputText;
+	chat_Box chat_Box;
 
 	int checkButtonPressed();
 	void eraseText();
