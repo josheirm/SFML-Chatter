@@ -3,6 +3,8 @@
 #include "SFML/Window.hpp"
 //#include <TGUI/Widgets/Button.hpp>
 
+//externed
+extern bool g_sendTexttoServerFlag;
 
 
 
@@ -89,7 +91,10 @@ int input_Box::buttonPressed()
 	const sf::String  tempstring = getTextFunct();
 	std::string s1 = tempstring;
 	eraseText();
-	chat_Box.addTexttoChatBox(tempstring);// addLine();
+	chat_Box.addTexttoChatBox(tempstring);
+	g_sendTexttoServerFlag = true;
+	
+	// addLine();
 	
 	return(1);
 }

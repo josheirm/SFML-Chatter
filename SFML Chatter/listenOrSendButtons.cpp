@@ -1,15 +1,17 @@
 #include "listenOrSendButtons.h"
+//externed
 
 
 
 
 void listenorSendButtons::drawtheButtons(tgui::Gui& gui)
 {
+	
 	buttonListen = button_Listen.create("a");
 
 	//button->setRenderer(theme.getRenderer("Button"));
 	buttonListen->setPosition(280, 50);
-	buttonListen->setText("You're Listening");
+	buttonListen->setText("You're the Server");
 	buttonListen->setSize(150, 30);
 	buttonListen->connect("pressed", [=]() { setListen(); });
 	//child->add(button);
@@ -44,13 +46,13 @@ void listenorSendButtons::setListen()
 {
 	if (g_isListener)
 	{
-		buttonListen->setText("You're Recieving");
+		buttonListen->setText("You're the Client");
 		g_isListener = false;
 	}
 	//starts as listening
 	else
 	{
-		buttonListen->setText("You're Listening");
+		buttonListen->setText("You're the Server");
 		g_isListener = true;
 	}
 }
@@ -66,5 +68,6 @@ void listenorSendButtons::setStart()
 		g_isStarted = true;
 	}
 
+	
 
 }

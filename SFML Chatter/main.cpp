@@ -5,9 +5,9 @@
 #include "client.h"
 #include "listenorSendButtons.h"
 #include "server.h"
-
+bool g_sendTexttoServerFlag = false;
 //acer is client , emachine is server
-
+bool g_sendOverReadyTextFlag = false;
 #define isserver 0
 int gcounter = 1;
 void loadWidgets(tgui::Gui& gui)
@@ -38,9 +38,18 @@ listenorSendButtons * listandReceiveButton = new listenorSendButtons();
 server * listener_ =  new server();
 
 
-int main()
+int main(int argc, char * argv[]) {
 
-{
+//	if(argc == 2)
+//	{
+//		if (argv[1] == "client")
+//		{
+//			#undef isserver
+//			#define isserver 0
+//		}
+//	}
+
+
 	//char teststring[5];
 	//strcpy_s(teststring, "gggg");
 	//std::cout <<teststring;
@@ -112,12 +121,21 @@ int main()
 		//////////////
 
 		//client sends a test message
-		if (isserver == false and gcounter == 1)
+		//check extern value
+		if (isserver == false && gcounter == 1 && g_sendTexttoServerFlag == true)
 		{
 			gcounter++;
-			char datatest[5] = "test";
+			
+
+			std::string tempstring = inputBox->getTextFunct();
+			char datatosend[100];
+			strncpy_s(datatosend, tempstring.c_str(), sizeof(datatosend));
+			datatosend[sizeof(datatosend) - 1] = 0;
+			/////
+			
+			//char datatest[5] = "test";
 			//strcpy_s(datatest, "test\0");
-			if (listener_->clientofServer.socket.send(datatest, 5) != sf::Socket::Done)
+			if (listener_->clientofServer.socket.send(datatosend, sizeof(datatosend)) != sf::Socket::Done)
 				//clientsocket(datatest, 5) != sf::Socket::Done)
 			{
 				std::cout << "error - send" << std::endl;
