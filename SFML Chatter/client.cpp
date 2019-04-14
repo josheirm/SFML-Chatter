@@ -28,7 +28,8 @@ void client::connect()
 {
 	sf::TcpSocket socket;
 	//acer - 3, emachine - 5
-	sf::Socket::Status status = socket.connect("0.0.0.dlastdigit", 53000);
+	//sf::Socket::Status status = socket.connect("0.0.0.3", 53000);
+	sf::Socket::Status status = socket.connect("0.0.0.5", 53000);
 	
 	if (status != sf::Socket::Done)
 	{

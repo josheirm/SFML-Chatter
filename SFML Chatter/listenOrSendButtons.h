@@ -5,8 +5,10 @@ typedef std::shared_ptr< tgui::Button >ConstPtrButton;
 class listenorSendButtons
 {
 public:
+	void setStart();
+	bool g_isStarted;
 	bool g_isListener;
-	ConstPtrButton buttonReceive;
+	ConstPtrButton buttonStart;
 	ConstPtrButton buttonListen;
 	tgui::Button button_Listen;
 	tgui::Button button_Receive;
