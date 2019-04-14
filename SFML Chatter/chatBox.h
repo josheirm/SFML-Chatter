@@ -12,7 +12,7 @@ public:
 
 
 
-	void addTexttoChatBox();
+	void addTexttoChatBox(sf::String string);
 	void drawChatBox(tgui::Gui& gui);
 	
 

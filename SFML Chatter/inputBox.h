@@ -17,10 +17,10 @@ class input_Box
 public:
 	tgui::Button button_;
 	tgui::TextBox text_Box;
-	ConstPtrTextBox  inputText;
+	ConstPtrTextBox  inputTextBox;
 	chat_Box chat_Box;
 
-	int checkButtonPressed();
+	int buttonPressed();
 	void eraseText();
 	const sf::String &	text = "";
 	//static tgui::Button::Ptr tgui::Button::create(text);
@@ -30,7 +30,8 @@ public:
 
 	void drawWindow(tgui::Gui& gui);
 	
-	 sf::String & getTextFunct();
+	//consider changing this to a reference
+	 const sf::String  getTextFunct();
 	
 
 	

@@ -33,8 +33,9 @@ chat_Box::~chat_Box()
 {
 }
 
-void chat_Box::addTexttoChatBox()
+void chat_Box::addTexttoChatBox(sf::String  string)
 {
-	chatbox->addLine("test",  sf::Color::Green);
+	std::string s1 = string;
+	chatbox->addLine(string,  sf::Color::Green);
 
 }

@@ -1,4 +1,6 @@
 #include "inputBox.h"
+#include "SFML/Graphics.hpp"
+#include "SFML/Window.hpp"
 //#include <TGUI/Widgets/Button.hpp>
 
 
@@ -17,12 +19,12 @@ void input_Box::drawWindow(tgui::Gui& gui)
 	gui.add(picture);
 
 
-	inputText = text_Box.create();
-	inputText->setSize({ "500", "100" });
-	inputText->setPosition({ "100", "100" });
+	inputTextBox = text_Box.create();
+	inputTextBox->setSize({ "500", "100" });
+	inputTextBox->setPosition({ "100", "100" });
 	//editBoxUsername->setDefaultText("Username");
-	//inputText->setText("a");
-	gui.add(inputText);
+	//inputTextBox->setText("a");
+	gui.add(inputTextBox);
 	//typdef std::shared_ptr<tgui::ChildWindow> tgui::ChildWindow::Ptr a; 
 	
 	
@@ -40,22 +42,26 @@ void input_Box::drawWindow(tgui::Gui& gui)
 	button->setPosition(100, 200);
 	button->setText("Send Text");
 	button->setSize(100, 30);
-	button->connect("pressed", [=]() { eraseText(); });
+	button->connect("pressed", [=]() { buttonPressed(); });
 	//child->add(button);
 	gui.add(button);
 
 
 }
 
-sf::String& input_Box::getTextFunct()
+const sf::String input_Box::getTextFunct()
 {
 	//typedef std::shared_ptr< TextBox >Ptr;
 	//const sf::String & a = 
 
 	//typedef std::shared_ptr<tgui::TextBox >Ptr;
+	//const sf::String a = " ";
+	//sf::String & a;
+	const sf::String a = inputTextBox->getText();
+	std::string s1 = a;
+	//window.draw(a);
+	return(a);
 
-	sf::String  a = " ";
-	return(a = text_Box.getText());
 	
 	
 }
@@ -69,8 +75,8 @@ sf::String& input_Box::getTextFunct()
 void input_Box::eraseText()
 {
 	sf::String text1 = "";
-	inputText->setText(text1);
-	chat_Box.addTexttoChatBox();// addLine();
+	inputTextBox->setText(text1);
+	
 }
 
 
@@ -78,11 +84,12 @@ input_Box::~input_Box()
 {
 }
 
-int input_Box::checkButtonPressed()
+int input_Box::buttonPressed()
 {
-	// SignalString sigString = button_.onPress();
-	//{
-
-	//}
+	const sf::String  tempstring = getTextFunct();
+	std::string s1 = tempstring;
+	eraseText();
+	chat_Box.addTexttoChatBox(tempstring);// addLine();
+	
 	return(1);
 }
