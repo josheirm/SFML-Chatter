@@ -1,6 +1,9 @@
 #include "client.h"
 #include "string.h"
 
+//acer - 3 , emachine 5
+#define dlastdigit 3
+
 
 void client::getLocalAddress()
 {
@@ -24,7 +27,9 @@ client::~client()
 void client::connect()
 {
 	sf::TcpSocket socket;
-	sf::Socket::Status status = socket.connect("192.168.0.5", 53000);
+	//acer - 3, emachine - 5
+	sf::Socket::Status status = socket.connect("0.0.0.dlastdigit", 53000);
+	
 	if (status != sf::Socket::Done)
 	{
 		// error...

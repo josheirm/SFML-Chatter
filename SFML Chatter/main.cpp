@@ -3,6 +3,7 @@
 #include "inputBox.h"
 #include "chatBox.h"
 #include "client.h"
+#include "listenorSendButtons.h"
 
 void loadWidgets(tgui::Gui& gui)
 {
@@ -28,7 +29,7 @@ void loadWidgets(tgui::Gui& gui)
 //chat_Box * chatBox = new chat_Box();
 input_Box * inputBox = new input_Box();
 client * clientobj = new client();
-
+listenorSendButtons * listandReceiveButton = new listenorSendButtons();
 
 int main()
 {
@@ -37,7 +38,7 @@ int main()
 
 	input_Box().drawWindow(gui);
 	input_Box().chat_Box.drawChatBox(gui);
-	
+	listenorSendButtons().drawtheButtons(gui);
 	
 	
 

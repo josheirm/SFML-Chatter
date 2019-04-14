@@ -22,12 +22,14 @@
     <ClCompile Include="chatBox.cpp" />
     <ClCompile Include="client.cpp" />
     <ClCompile Include="inputBox.cpp" />
+    <ClCompile Include="listenOrSendButtons.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chatBox.h" />
     <ClInclude Include="client.h" />
     <ClInclude Include="inputBox.h" />
+    <ClInclude Include="listenOrSendButtons.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
