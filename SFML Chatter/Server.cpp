@@ -5,7 +5,7 @@
 server::server()
 {
 
-	strcpy_s(data, "test");
+	strcpy_s(data, "zzzz");
 }
 
 void server::serverListen()
@@ -32,7 +32,7 @@ sf::TcpListener& server::getServerListener()
 	return(listener);
 }
 
-client& server::getClientObject()
+client &server::getClientObject()
 {
 	return(clientofServer);
 }
@@ -51,13 +51,14 @@ void server::sendData()
 void server::receiveData()
 {
 	// TCP socket:
+	received = 5;
 	if (clientofServer.socket.receive(data, 5, received) != sf::Socket::Done)
 	{
-		std::cout << "error server received";
+		std::cout << "error server received"<<std::endl;
 	}
 	
 	//std::cout << "recievd passed - is here!";
-	//std::cout << "Received " << received << " bytes" << std::endl;
+	std::cout << "Received: " << data << std::endl;
 
 
 }

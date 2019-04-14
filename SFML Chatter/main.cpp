@@ -8,7 +8,7 @@
 
 //acer is client , emachine is server
 
-#define isserver 1
+#define isserver 0
 int gcounter = 1;
 void loadWidgets(tgui::Gui& gui)
 {
@@ -39,9 +39,11 @@ server * listener_ =  new server();
 
 
 int main()
-{
 
-	std::cout << "test";
+{
+	//char teststring[5];
+	//strcpy_s(teststring, "gggg");
+	//std::cout <<teststring;
 
 	sf::RenderWindow window{ {700, 600}, "Window" };
 	tgui::Gui gui{ window }; // Create the gui and attach it to the window
@@ -84,12 +86,13 @@ int main()
 		{
 			if (listener_->getServerListener().listen(53000) != sf::Socket::Done)
 			{
-				// error...
+				std::cout << "error1"<<std::endl;
 			}
 
 			if (listener_->getServerListener().accept(listener_->clientofServer.socket) != sf::Socket::Done)
 			{
 				// error...
+				std::cout << "error2"<<std::endl;
 			}
 
 		}
@@ -102,20 +105,22 @@ int main()
 
 		//////////////
 		//receiveData()
-		listener_->receiveData();// receiveData();
-
+		if (isserver == true)
+		{
+			listener_->receiveData();// receiveData();
+		}
 		//////////////
 
 		//client sends a test message
 		if (isserver == false and gcounter == 1)
 		{
 			gcounter++;
-			char datatest[5];
-			strcpy_s(datatest, "test\0");
-			if (listener_->clientsocket.send(datatest, 5) != sf::Socket::Done);
+			char datatest[5] = "test";
+			//strcpy_s(datatest, "test\0");
+			if (listener_->clientofServer.socket.send(datatest, 5) != sf::Socket::Done)
 				//clientsocket(datatest, 5) != sf::Socket::Done)
 			{
-				// error...
+				std::cout << "error - send" << std::endl;
 			}
 
 		}

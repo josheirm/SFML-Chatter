@@ -7,20 +7,22 @@
 class server
 {
 public:
+	
+	client clientofServer;
+
 	sf::TcpSocket clientsocket;
 
 	std::size_t received;
 	void receiveData();
-	client clientofServer;
-
+	
 	sf::TcpListener listener;
 	sf::TcpListener & getServerListener();
 	void serverListen();
 
 	//sf::TcpSocket socket;
-	char data[100] = "test";
+	char data[5];
 
-	client& getClientObject();
+	client & getClientObject();
 	
 
 

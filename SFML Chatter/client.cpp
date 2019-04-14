@@ -23,7 +23,7 @@ void client::receiveData()
 	}
 	else
 	{
-		//std::cout << "passed recieve data\n";
+		std::cout << "data: "<<data<<"\n";
 	}
 	//std::cout << "Received " << received << " bytes" << std::endl;
 
@@ -49,10 +49,14 @@ void client::getLocalAddress()
 client::client()
 {
 	strcpy_s(data, "test");
+	//input_Box * socket = new input_Box();
 	//data[5] = "test\0";
 }
 
-
+sf::TcpSocket& client::getSocket()
+{
+	return(socket);
+}
 
 client::~client()
 {

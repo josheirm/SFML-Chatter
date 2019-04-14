@@ -13,7 +13,7 @@ public:
 	char data[5];
 	void receiveData();
 	//sf::TcpSocket clientSocket;
-	
+	sf::TcpSocket& getSocket();
 	sf::TcpSocket & getClientSocket();
 	void clientConnect();
 
