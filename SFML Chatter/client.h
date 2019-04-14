@@ -7,11 +7,21 @@ class client
 
 
 public:
-	//lpAddress = 0;
+	sf::TcpSocket socket;
+	std::size_t received;
 
+	char data[5];
+	void receiveData();
+	//sf::TcpSocket clientSocket;
+	
+	sf::TcpSocket & getClientSocket();
+	void clientConnect();
+
+	
+	
 	void getLocalAddress();
-
-	void connect();
+	void sendData();
+	//void connect();
 	client();
 	~client();
 };

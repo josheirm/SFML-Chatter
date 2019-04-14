@@ -4,7 +4,12 @@
 #include "chatBox.h"
 #include "client.h"
 #include "listenorSendButtons.h"
+#include "server.h"
 
+//acer is client , emachine is server
+
+#define isserver 1
+int gcounter = 1;
 void loadWidgets(tgui::Gui& gui)
 {
 	//tgui::Button::Ptr button = tgui::Button::create();
@@ -28,11 +33,16 @@ void loadWidgets(tgui::Gui& gui)
 
 //chat_Box * chatBox = new chat_Box();
 input_Box * inputBox = new input_Box();
-client * clientobj = new client();
+//client * clientobj = new client();
 listenorSendButtons * listandReceiveButton = new listenorSendButtons();
+server * listener_ =  new server();
+
 
 int main()
 {
+
+	std::cout << "test";
+
 	sf::RenderWindow window{ {700, 600}, "Window" };
 	tgui::Gui gui{ window }; // Create the gui and attach it to the window
 
@@ -55,12 +65,64 @@ int main()
 
 
 
-	clientobj->getLocalAddress();
+	listener_->clientofServer.getLocalAddress();
 	//getLocalAddress();
-	
+		// Endless loop that waits for new connections
+	//while (1)
+	//{
+		//sf::TcpSocket client;
+
+
+		//listener_->clientofServer.getLocalAddress();
+
+		//is client
+		if(isserver == 0)
+		{	//acer is client only need to change define
+			listener_->clientofServer.clientConnect();
+		}
+		if (isserver == 1)
+		{
+			if (listener_->getServerListener().listen(53000) != sf::Socket::Done)
+			{
+				// error...
+			}
+
+			if (listener_->getServerListener().accept(listener_->clientofServer.socket) != sf::Socket::Done)
+			{
+				// error...
+			}
+
+		}
+
+
+	//}
 
 	while (window.isOpen())
 	{
+
+		//////////////
+		//receiveData()
+		listener_->receiveData();// receiveData();
+
+		//////////////
+
+		//client sends a test message
+		if (isserver == false and gcounter == 1)
+		{
+			gcounter++;
+			char datatest[5];
+			strcpy_s(datatest, "test\0");
+			if (listener_->clientsocket.send(datatest, 5) != sf::Socket::Done);
+				//clientsocket(datatest, 5) != sf::Socket::Done)
+			{
+				// error...
+			}
+
+		}
+			
+		
+
+
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
