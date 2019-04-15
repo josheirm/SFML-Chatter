@@ -73,9 +73,6 @@ int main(int argc, char * argv[]) {
 	input_Box().chat_Box.drawChatBox(gui);
 	listenorSendButtons().drawtheButtons(gui);
 	
-	window.clear();
-	gui.draw(); // Draw all widgets
-	window.display();
 	
 
 
@@ -107,6 +104,12 @@ int main(int argc, char * argv[]) {
 
 	while (window.isOpen())
 	{
+
+		window.clear();
+		gui.draw(); // Draw all widgets
+		window.display();
+
+
 		/////////////
 
 		//is client
