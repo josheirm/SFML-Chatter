@@ -68,6 +68,7 @@ void listenorSendButtons::setStart()
 	{
 		buttonStart->setText("Stopped");
 		g_isStarted = false;
+		
 	}else
 	{
 		buttonStart->setText("Started");

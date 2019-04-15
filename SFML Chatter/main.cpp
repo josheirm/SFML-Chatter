@@ -7,16 +7,21 @@
 #include "server.h"
 
 //important determiner for running client or server code with same program
-//set for client
+
+
+////////////////////
 //externed
 int IS_SERVER = 0;
-
-
+//externed
+bool g_isStarted = false;
+//externed
 bool g_sendTexttoServerFlag = false;
-//acer is client , emachine is server
-bool g_sendOverReadyTextFlag = false;
+///////////////////
 
 int gcounter = 1;
+int g_clientReady = 0;
+int g_serverReady = 0;
+
 void loadWidgets(tgui::Gui& gui)
 {
 	//tgui::Button::Ptr button = tgui::Button::create();
@@ -68,6 +73,9 @@ int main(int argc, char * argv[]) {
 	input_Box().chat_Box.drawChatBox(gui);
 	listenorSendButtons().drawtheButtons(gui);
 	
+	window.clear();
+	gui.draw(); // Draw all widgets
+	window.display();
 	
 
 
@@ -93,35 +101,52 @@ int main(int argc, char * argv[]) {
 
 		//listener_->clientofServer.getLocalAddress();
 
-		//is client
-		if(IS_SERVER == 0)
-		{	//acer is client only need to change define
-			listener_->clientofServer.clientConnect();
-		}
-		if (IS_SERVER == 1)
-		{
-			if (listener_->getServerListener().listen(53000) != sf::Socket::Done)
-			{
-				std::cout << "error1"<<std::endl;
-			}
-
-			if (listener_->getServerListener().accept(listener_->clientofServer.socket) != sf::Socket::Done)
-			{
-				// error...
-				std::cout << "error2"<<std::endl;
-			}
-
-		}
-
+		
 
 	//}
 
 	while (window.isOpen())
 	{
+		/////////////
+
+		//is client
+		if (IS_SERVER == 0 && g_isStarted)
+		{	//acer is client only need to change define
+
+			while (1)
+			{
+				listener_->clientofServer.clientConnect();
+				g_clientReady = 1;
+			}
+			g_isStarted = -1;
+		}
+		if (IS_SERVER == 1 && g_isStarted)
+		{
+			if (listener_->getServerListener().listen(53000) != sf::Socket::Done)
+			{
+				std::cout << "error1" << std::endl;
+			}
+
+			if (listener_->getServerListener().accept(listener_->clientofServer.socket) != sf::Socket::Done)
+			{
+				// error...
+				std::cout << "error2" << std::endl;
+			}
+			g_isStarted = -1;
+			g_serverReady = 1;
+		}
+
+
+		/////////////
+
+
+
+
+
 
 		//////////////
 		//receiveData()
-		if (IS_SERVER == true)
+		if (g_serverReady == true)
 		{
 			listener_->receiveData();// receiveData();
 		}
@@ -129,7 +154,7 @@ int main(int argc, char * argv[]) {
 
 		//client sends a test message
 		//check extern value
-		if (IS_SERVER == false && gcounter == 1 && g_sendTexttoServerFlag == true)
+		if (g_clientReady == true  && gcounter == 1 && g_sendTexttoServerFlag == true)
 		{
 			gcounter++;
 			
@@ -167,9 +192,9 @@ int main(int argc, char * argv[]) {
 
 
 
-
-		window.clear();
-		gui.draw(); // Draw all widgets
-		window.display();
+		//moved
+		//window.clear();
+		//gui.draw(); // Draw all widgets
+		//window.display();
 	}
 }

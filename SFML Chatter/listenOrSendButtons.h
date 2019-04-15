@@ -2,13 +2,14 @@
 #include <TGUI/TGUI.hpp>
 typedef std::shared_ptr< tgui::Button >ConstPtrButton;
 extern int IS_SERVER;
-
+//externed
+extern bool g_isStarted;
 
 class listenorSendButtons
 {
 public:
 	void setStart();
-	bool g_isStarted;
+	
 	bool g_isListener;
 	ConstPtrButton buttonStart;
 	ConstPtrButton buttonListen;
