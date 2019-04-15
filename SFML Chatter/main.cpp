@@ -151,8 +151,8 @@ int main(int argc, char * argv[]) {
 
 
 		//////////////
-		//receiveData()
-		if (g_serverReady == true)
+		//receiveData() - server
+		if (g_serverReady  && g_clientReady && (IS_SERVER == 1))
 		{
 			listener_->receiveData();// receiveData();
 		}
@@ -160,7 +160,7 @@ int main(int argc, char * argv[]) {
 
 		//client sends a test message
 		//check extern value
-		if (g_clientReady == true  && gcounter == 1 && g_sendTexttoServerFlag == true)
+		if (g_clientReady  && g_serverReady && gcounter == 1 && g_sendTexttoServerFlag && (IS_SERVER == 0))
 		{
 			gcounter++;
 			
