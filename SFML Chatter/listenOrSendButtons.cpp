@@ -11,7 +11,7 @@ void listenorSendButtons::drawtheButtons(tgui::Gui& gui)
 
 	//button->setRenderer(theme.getRenderer("Button"));
 	buttonListen->setPosition(280, 50);
-	buttonListen->setText("You're the Server");
+	buttonListen->setText("You're the Client");
 	buttonListen->setSize(150, 30);
 	buttonListen->connect("pressed", [=]() { setListen(); });
 	//child->add(button);
@@ -33,7 +33,8 @@ void listenorSendButtons::drawtheButtons(tgui::Gui& gui)
 
 listenorSendButtons::listenorSendButtons()
 {
-	g_isListener = true;
+	
+	g_isListener = false;
 	g_isStarted = false;
 }
 
@@ -44,16 +45,21 @@ listenorSendButtons::~listenorSendButtons()
 
 void listenorSendButtons::setListen()
 {
+	//starts as the server  (true)
 	if (g_isListener)
 	{
 		buttonListen->setText("You're the Client");
 		g_isListener = false;
+		IS_SERVER = 0;
+
 	}
 	//starts as listening
 	else
 	{
 		buttonListen->setText("You're the Server");
 		g_isListener = true;
+		IS_SERVER = 1;
+
 	}
 }
 void listenorSendButtons::setStart()

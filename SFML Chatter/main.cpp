@@ -5,10 +5,17 @@
 #include "client.h"
 #include "listenorSendButtons.h"
 #include "server.h"
+
+//important determiner for running client or server code with same program
+//set for client
+//externed
+int IS_SERVER = 0;
+
+
 bool g_sendTexttoServerFlag = false;
 //acer is client , emachine is server
 bool g_sendOverReadyTextFlag = false;
-#define isserver 0
+
 int gcounter = 1;
 void loadWidgets(tgui::Gui& gui)
 {
@@ -87,11 +94,11 @@ int main(int argc, char * argv[]) {
 		//listener_->clientofServer.getLocalAddress();
 
 		//is client
-		if(isserver == 0)
+		if(IS_SERVER == 0)
 		{	//acer is client only need to change define
 			listener_->clientofServer.clientConnect();
 		}
-		if (isserver == 1)
+		if (IS_SERVER == 1)
 		{
 			if (listener_->getServerListener().listen(53000) != sf::Socket::Done)
 			{
@@ -114,7 +121,7 @@ int main(int argc, char * argv[]) {
 
 		//////////////
 		//receiveData()
-		if (isserver == true)
+		if (IS_SERVER == true)
 		{
 			listener_->receiveData();// receiveData();
 		}
@@ -122,7 +129,7 @@ int main(int argc, char * argv[]) {
 
 		//client sends a test message
 		//check extern value
-		if (isserver == false && gcounter == 1 && g_sendTexttoServerFlag == true)
+		if (IS_SERVER == false && gcounter == 1 && g_sendTexttoServerFlag == true)
 		{
 			gcounter++;
 			

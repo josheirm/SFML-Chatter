@@ -1,6 +1,8 @@
 #pragma once
 #include <TGUI/TGUI.hpp>
 typedef std::shared_ptr< tgui::Button >ConstPtrButton;
+extern int IS_SERVER;
+
 
 class listenorSendButtons
 {
