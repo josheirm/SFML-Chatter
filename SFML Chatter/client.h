@@ -15,7 +15,7 @@ public:
 	//sf::TcpSocket clientSocket;
 	sf::TcpSocket& getSocket();
 	sf::TcpSocket & getClientSocket();
-	void clientConnect();
+	int clientConnect();
 
 	
 	

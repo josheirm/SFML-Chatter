@@ -112,12 +112,15 @@ int main(int argc, char * argv[]) {
 		//is client
 		if (IS_SERVER == 0 && g_isStarted)
 		{	//acer is client only need to change define
+			int flag = -1;
 
-			while (1)
+			while (flag == -1)
 			{
-				listener_->clientofServer.clientConnect();
-				g_clientReady = 1;
+				flag = listener_->clientofServer.clientConnect();
+				
 			}
+			g_clientReady = 1;
+
 			g_isStarted = -1;
 		}
 		if (IS_SERVER == 1 && g_isStarted)

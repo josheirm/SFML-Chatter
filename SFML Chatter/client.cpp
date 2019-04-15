@@ -62,7 +62,7 @@ client::~client()
 {
 }
 
-void client::clientConnect()
+int client::clientConnect()
 {
 	//sf::TcpSocket socket;
 	//acer - 3, emachine - 5
@@ -75,10 +75,12 @@ void client::clientConnect()
 	{
 		// error...
 		//std::cout << "failed connect\n";
+		return(-1);
 	}
 	else
 	{
 		std::cout << "passed connect\n";
+		return(1);
 	}
 
 }
