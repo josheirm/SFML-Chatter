@@ -24,7 +24,7 @@ void listenorSendButtons::drawtheButtons(tgui::Gui& gui)
 	buttonStart->setPosition(480, 50);
 	buttonStart->setText("Stopped");
 	buttonStart->setSize(100, 30);
-	buttonStart->connect("pressed", [=]() { setStart(); });
+	buttonStart->connect("pressed", [=]() { setisStarted(true); });
 	//
 	////child->add(button);
 	gui.add(buttonStart);
@@ -36,6 +36,7 @@ listenorSendButtons::listenorSendButtons()
 	
 	g_isListener = false;
 	g_isStarted = false;
+	IS_SERVER = 0;
 }
 
 
@@ -62,7 +63,7 @@ void listenorSendButtons::setListen()
 
 	}
 }
-void listenorSendButtons::setStart()
+void listenorSendButtons::setisStarted(bool value)
 {
 	if (g_isStarted == true)
 	{
@@ -74,7 +75,28 @@ void listenorSendButtons::setStart()
 		buttonStart->setText("Started");
 		g_isStarted = true;
 	}
+}
 
-	
+bool listenorSendButtons::getisStarted()
+{
+	return(g_isStarted);
+		
+}
+
+void listenorSendButtons::alternateServer()
+{
+	if(IS_SERVER == 1)
+	{
+		IS_SERVER = 0;
+	}
+	else
+	{
+		IS_SERVER = 1;
+	}
+}
+int listenorSendButtons::GETISSERVER()
+{
+	return(IS_SERVER);
 
 }
+

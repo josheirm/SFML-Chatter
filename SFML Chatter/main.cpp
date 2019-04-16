@@ -5,17 +5,16 @@
 #include "client.h"
 #include "listenorSendButtons.h"
 #include "server.h"
-
+#include <SFML/System/String.hpp>
 //important determiner for running client or server code with same program
 
 
 ////////////////////
 //externed
-int IS_SERVER = 0;
+
+
 //externed
-bool g_isStarted = false;
-//externed
-bool g_sendTexttoServerFlag = false;
+//bool g_sendTexttoServerFlag = false;
 ///////////////////
 
 int gcounter = 1;
@@ -105,28 +104,31 @@ int main(int argc, char * argv[]) {
 	while (window.isOpen())
 	{
 
+		
+
 		window.clear();
 		gui.draw(); // Draw all widgets
 		window.display();
-
+		const sf::String & tempString = (inputBox->getTextFunct());
 
 		/////////////
 
 		//is client
-		if (IS_SERVER == 0 && g_isStarted)
+		if (listandReceiveButton->GETISSERVER() == 0 && listandReceiveButton->g_isStarted)
 		{	//acer is client only need to change define
-			int flag = -1;
+			int flag = 0;
 
-			while (flag == -1)
+			while (flag == 0)
 			{
 				flag = listener_->clientofServer.clientConnect();
 				
 			}
 			g_clientReady = 1;
 
-			g_isStarted = -1;
+			//turns off
+			listandReceiveButton->g_isStarted = false;
 		}
-		if (IS_SERVER == 1 && g_isStarted)
+		if (listandReceiveButton->GETISSERVER() == 1 && listandReceiveButton->g_isStarted)
 		{
 			if (listener_->getServerListener().listen(53000) != sf::Socket::Done)
 			{
@@ -138,7 +140,7 @@ int main(int argc, char * argv[]) {
 				// error...
 				std::cout << "error2" << std::endl;
 			}
-			g_isStarted = -1;
+			listandReceiveButton->g_isStarted = false;
 			g_serverReady = 1;
 		}
 
@@ -152,7 +154,7 @@ int main(int argc, char * argv[]) {
 
 		//////////////
 		//receiveData() - server
-		if (g_serverReady  && g_clientReady && (IS_SERVER == 1))
+		if (g_serverReady  && g_clientReady && (listandReceiveButton->GETISSERVER() == 1))
 		{
 			listener_->receiveData();// receiveData();
 		}
@@ -160,24 +162,33 @@ int main(int argc, char * argv[]) {
 
 		//client sends a test message
 		//check extern value
-		if (g_clientReady  && g_serverReady && gcounter == 1 && g_sendTexttoServerFlag && (IS_SERVER == 0))
+		//g_sendTexttoServerFlag - set and get
+		if (g_clientReady  && gcounter == 1 && (listandReceiveButton->GETISSERVER() == 0))
 		{
 			gcounter++;
 			
-
-			std::string tempstring = inputBox->getTextFunct();
-			char datatosend[100];
-			strncpy_s(datatosend, tempstring.c_str(), sizeof(datatosend));
-			datatosend[sizeof(datatosend) - 1] = 0;
-			/////
 			
+			sf::String tempString =  (inputBox->getTextFunct());
+			
+
+			
+			
+			// do stuff
+			//delete[] cstr;
+			/////////
+				
+			
+			//USE PACKETS HERE!!!!
+
+
+
 			//char datatest[5] = "test";
 			//strcpy_s(datatest, "test\0");
-			if (listener_->clientofServer.socket.send(datatosend, sizeof(datatosend)) != sf::Socket::Done)
-				//clientsocket(datatest, 5) != sf::Socket::Done)
-			{
-				std::cout << "error - send" << std::endl;
-			}
+			//if (listener_->clientofServer.socket.send(cstr, sizeof(cstr)) != sf::Socket::Done)
+			//	//clientsocket(datatest, 5) != sf::Socket::Done)
+			//{
+			//	std::cout << "error - send" << std::endl;
+			//}
 
 		}
 			

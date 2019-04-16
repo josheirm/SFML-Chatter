@@ -75,7 +75,7 @@ int client::clientConnect()
 	{
 		// error...
 		//std::cout << "failed connect\n";
-		return(-1);
+		return(0);
 	}
 	else
 	{

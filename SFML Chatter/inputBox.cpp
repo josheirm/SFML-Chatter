@@ -4,15 +4,34 @@
 //#include <TGUI/Widgets/Button.hpp>
 
 //externed
-extern bool g_sendTexttoServerFlag;
+//extern bool g_sendTexttoServerFlag;
 
 
 
 
 input_Box::input_Box()
 {
-	
+	g_sendTexttoServerFlag = false;
 }
+
+void input_Box::setisMessage(bool value)
+{
+	g_sendTexttoServerFlag = value;
+}
+bool input_Box::getisMessage()
+{
+	if (g_sendTexttoServerFlag)
+	{
+		return(true);
+	}
+	else
+	{
+		return(false);
+	}
+}
+
+
+
 
 void input_Box::drawWindow(tgui::Gui& gui)
 {
@@ -50,20 +69,18 @@ void input_Box::drawWindow(tgui::Gui& gui)
 
 
 }
-
-const sf::String input_Box::getTextFunct()
+ 
+ const sf::String & input_Box::getTextFunct()
 {
-	//typedef std::shared_ptr< TextBox >Ptr;
-	//const sf::String & a = 
+	 
+	
+	const sf::String& stringx = inputTextBox->getText();
+	//sf::String string[1] = stringx ;
+	
+	return(stringx);
 
-	//typedef std::shared_ptr<tgui::TextBox >Ptr;
-	//const sf::String a = " ";
-	//sf::String & a;
-	const sf::String a = inputTextBox->getText();
-	std::string s1 = a;
-	//window.draw(a);
-	return(a);
-
+	
+	
 	
 	
 }
@@ -88,11 +105,17 @@ input_Box::~input_Box()
 
 int input_Box::buttonPressed()
 {
-	const sf::String  tempstring = getTextFunct();
-	std::string s1 = tempstring;
-	eraseText();
+	//sf::String  tempstring = getTextFunct();
+	//std::string s1 = tempstring;
+
+	std::string  tempstring = getTextFunct();
+	
+	//eraseText();
+	sf::String::String(tempstring);
+
+
 	chat_Box.addTexttoChatBox(tempstring);
-	g_sendTexttoServerFlag = true;
+	//g_sendTexttoServerFlag;
 	
 	// addLine();
 	
