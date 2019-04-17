@@ -50,15 +50,22 @@ void server::sendData()
 
 void server::receiveData()
 {
+	sf::String test = "";
+	sf::String &  temp = test;
+
 	// TCP socket:
-	received = 5;
-	if (clientofServer.socket.receive(data, 5, received) != sf::Socket::Done)
-	{
-		std::cout << "error server received"<<std::endl;
-	}
 	
+	//!= sf::Socket::Done
+	clientofServer.socket.receive(packet);
+	//{
+	//	std::cout << "error server received"<<std::endl;
+	//}
+	//extract
+	packet >>   temp;
+	std::string s1 = temp;
+	std::cout <<":: "<< s1;
 	//std::cout << "recievd passed - is here!";
-	std::cout << "Received: " << data << std::endl;
+	//std::cout << "Received: " << data << std::endl;
 
 
 }

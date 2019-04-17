@@ -23,7 +23,7 @@ public:
 	tgui::Button button_;
 	tgui::TextBox text_Box;
 	ConstPtrTextBox  inputTextBox;
-	chat_Box chat_Box;
+	chat_Box chatBox;
 
 	bool getisMessage();
 	void setisMessage(bool value);
@@ -41,7 +41,7 @@ public:
 	void drawWindow(tgui::Gui& gui);
 	
 	//consider changing this to a reference
-	   const sf::String &  getTextFunct();
+	   const sf::String   getTextFunct();
 	
 
 	

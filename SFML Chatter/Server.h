@@ -3,13 +3,14 @@
 #include <SFML/Network/TcpListener.hpp>
 #include "client.h"
 #include <iostream>
+#include <SFML/Network/Packet.hpp>
 
 class server
 {
 public:
 	
 	client clientofServer;
-
+	sf::Packet packet;
 	sf::TcpSocket clientsocket;
 
 	std::size_t received;

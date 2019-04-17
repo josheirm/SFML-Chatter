@@ -70,7 +70,7 @@ void input_Box::drawWindow(tgui::Gui& gui)
 
 }
  
- const sf::String & input_Box::getTextFunct()
+ const sf::String  input_Box::getTextFunct()
 {
 	 
 	
@@ -108,13 +108,13 @@ int input_Box::buttonPressed()
 	//sf::String  tempstring = getTextFunct();
 	//std::string s1 = tempstring;
 
-	std::string  tempstring = getTextFunct();
+	const sf::String   tempstring = getTextFunct();
 	
 	//eraseText();
-	sf::String::String(tempstring);
+	//sf::String::String(tempstring);
 
 
-	chat_Box.addTexttoChatBox(tempstring);
+	chatBox.addTexttoChatBox(tempstring);
 	//g_sendTexttoServerFlag;
 	
 	// addLine();

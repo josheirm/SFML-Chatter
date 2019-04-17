@@ -74,7 +74,7 @@ int client::clientConnect()
 	if (status != sf::Socket::Done)
 	{
 		// error...
-		//std::cout << "failed connect\n";
+		std::cout << "failed connect\n";
 		return(0);
 	}
 	else

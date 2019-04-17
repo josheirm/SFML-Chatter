@@ -6,6 +6,7 @@
 #include "listenorSendButtons.h"
 #include "server.h"
 #include <SFML/System/String.hpp>
+#include <SFML/Network/Packet.hpp>
 //important determiner for running client or server code with same program
 
 
@@ -17,39 +18,27 @@
 //bool g_sendTexttoServerFlag = false;
 ///////////////////
 
-int gcounter = 1;
-int g_clientReady = 0;
-int g_serverReady = 0;
 
-void loadWidgets(tgui::Gui& gui)
-{
-	//tgui::Button::Ptr button = tgui::Button::create();
-
-	//gui.add(button);
-
-	
-
-	//auto picture = tgui::Picture::create("image.jpg");
-	//picture->setSize({ "100%", "100%" });
-	//gui.add(picture);
-
-
-
-	auto editBoxUsername = tgui::TextBox::create();
-	editBoxUsername->setSize({ "200", "200" });
-	editBoxUsername->setPosition({ "16.67%", "16.67%" });
-	//editBoxUsername->setDefaultText("Username");
-	gui.add(editBoxUsername);
-}
 
 //chat_Box * chatBox = new chat_Box();
-input_Box * inputBox = new input_Box();
+input_Box * inputBox = new input_Box;
 //client * clientobj = new client();
-listenorSendButtons * listandReceiveButton = new listenorSendButtons();
-server * listener_ =  new server();
+server * listener_ =  new server;
 
 
 int main(int argc, char * argv[]) {
+
+	int gcounter = 1;
+	int g_clientReady = 0;
+	int g_serverReady = 0;
+
+	listenorSendButtons One;
+	listenorSendButtons * listandReceiveButton;
+	listandReceiveButton = &One;
+	
+	//listenorSendButtons * listandReceiveButton = new listenorSendButtons();
+
+
 
 //	if(argc == 2)
 //	{
@@ -68,10 +57,9 @@ int main(int argc, char * argv[]) {
 	sf::RenderWindow window{ {700, 600}, "Window" };
 	tgui::Gui gui{ window }; // Create the gui and attach it to the window
 
-	input_Box().drawWindow(gui);
-	input_Box().chat_Box.drawChatBox(gui);
-	listenorSendButtons().drawtheButtons(gui);
-	
+	inputBox->drawWindow(gui);
+	inputBox->chatBox.drawChatBox(gui);
+	listandReceiveButton->drawtheButtons(gui);
 	
 
 
@@ -87,7 +75,9 @@ int main(int argc, char * argv[]) {
 
 
 
-	listener_->clientofServer.getLocalAddress();
+	///listener_->clientofServer.getLocalAddress();
+	
+	
 	//getLocalAddress();
 		// Endless loop that waits for new connections
 	//while (1)
@@ -106,15 +96,13 @@ int main(int argc, char * argv[]) {
 
 		
 
-		window.clear();
-		gui.draw(); // Draw all widgets
-		window.display();
-		const sf::String & tempString = (inputBox->getTextFunct());
+		
+		//const sf::String & tempString = (inputBox->getTextFunct());
 
 		/////////////
-
+		int value2= (listandReceiveButton->getisStarted());// g_isStarted1;
 		//is client
-		if (listandReceiveButton->GETISSERVER() == 0 && listandReceiveButton->g_isStarted)
+		if ((listandReceiveButton->GETISSERVER() == 0)  && ((listandReceiveButton->getisStarted()) == true))
 		{	//acer is client only need to change define
 			int flag = 0;
 
@@ -126,9 +114,11 @@ int main(int argc, char * argv[]) {
 			g_clientReady = 1;
 
 			//turns off
-			listandReceiveButton->g_isStarted = false;
+			listandReceiveButton->setisStarted(false);
 		}
-		if (listandReceiveButton->GETISSERVER() == 1 && listandReceiveButton->g_isStarted)
+		
+		
+		if (listandReceiveButton->GETISSERVER() == 1 && listandReceiveButton->getisStarted() == true)
 		{
 			if (listener_->getServerListener().listen(53000) != sf::Socket::Done)
 			{
@@ -140,7 +130,7 @@ int main(int argc, char * argv[]) {
 				// error...
 				std::cout << "error2" << std::endl;
 			}
-			listandReceiveButton->g_isStarted = false;
+			listandReceiveButton->setisStarted(false);
 			g_serverReady = 1;
 		}
 
@@ -156,22 +146,25 @@ int main(int argc, char * argv[]) {
 		//receiveData() - server
 		if (g_serverReady  && g_clientReady && (listandReceiveButton->GETISSERVER() == 1))
 		{
-			listener_->receiveData();// receiveData();
+			//sf::Packet packet;
+			listener_->receiveData(); 
 		}
 		//////////////
 
+
 		//client sends a test message
-		//check extern value
-		//g_sendTexttoServerFlag - set and get
+		
 		if (g_clientReady  && gcounter == 1 && (listandReceiveButton->GETISSERVER() == 0))
 		{
 			gcounter++;
 			
-			
-			sf::String tempString =  (inputBox->getTextFunct());
-			
+			sf::Packet packet;
 
-			
+			const sf::String & tempString  = (inputBox->getTextFunct());
+			//tempString = "hi";
+										//tempString->insert("A");
+
+			packet << tempString;
 			
 			// do stuff
 			//delete[] cstr;
@@ -182,13 +175,10 @@ int main(int argc, char * argv[]) {
 
 
 
-			//char datatest[5] = "test";
-			//strcpy_s(datatest, "test\0");
-			//if (listener_->clientofServer.socket.send(cstr, sizeof(cstr)) != sf::Socket::Done)
-			//	//clientsocket(datatest, 5) != sf::Socket::Done)
-			//{
-			//	std::cout << "error - send" << std::endl;
-			//}
+			
+			//if (listener_->clientofServer.socket.send(tempstring, sizeof(tempstring)) != sf::Socket::Done)
+			listener_->clientofServer.socket.send(packet);
+
 
 		}
 			
@@ -206,7 +196,9 @@ int main(int argc, char * argv[]) {
 
 		//int ispressed = inputBox.checkButtonPressed();
 
-
+		window.clear();
+		gui.draw(); // Draw all widgets
+		window.display();
 
 
 		//moved

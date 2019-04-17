@@ -1,29 +1,38 @@
 #pragma once
 #include <TGUI/TGUI.hpp>
-typedef std::shared_ptr< tgui::Button >ConstPtrButton;
+// std::shared_ptr<  tgui::Button >PtrButton;
 
 //externed
 
 class listenorSendButtons
 {
+
+	
 public:
-	bool g_isStarted;
-	int IS_SERVER;
-	ConstPtrButton buttonStart;
-	ConstPtrButton buttonListen;
-	tgui::Button button_Listen;
-	tgui::Button button_Receive;
 	listenorSendButtons();
 	~listenorSendButtons();
-	
+
 	bool g_isListener;
+	bool g_isStarted1;
+	int IS_SERVER;
+	
+	
+	
+	//PtrButton buttonStart;
+	//PtrButton buttonListen;
+	//tgui::Button button_Listen;
+	//tgui::Button button_Receive;
+	
+	
 	void setListen();
 	void drawtheButtons(tgui::Gui& gui);
 	void alternateServer();
 	int GETISSERVER();
+	void setisServer(int value);
 	bool getisStarted();
-	void setisStarted(bool value);
-	
+	int setisStarted(bool value);
+
+private:	
 	
 };
 
