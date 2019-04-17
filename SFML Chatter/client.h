@@ -1,5 +1,6 @@
 #include "SFML/Network.hpp"
 #include <SFML/Network/IpAddress.hpp>
+#include "inputBox.h"
 #pragma once
 class client
 {
@@ -7,8 +8,13 @@ class client
 
 
 public:
+
+	
+	void copyInputBox( input_Box & copy);
+	input_Box clientInputBox;
 	sf::TcpSocket socket;
 	std::size_t received;
+	sf::Packet packet;
 
 	char data[5];
 	void receiveData();

@@ -9,6 +9,7 @@ class server
 {
 public:
 
+	sf::TcpSocket socket;
 	input_Box serverInputBox;
 	void copyInputBox( input_Box & copy);
 	bool isMessage;

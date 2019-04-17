@@ -115,7 +115,7 @@ int input_Box::buttonPressed()
 	//sf::String::String(tempstring);
 
 	//workd
-	//chatBox.addTexttoChatBox(tempstring);
+	chatBox.addTexttoChatBox(tempstring);
 	//g_sendTexttoServerFlag;
 	
 	

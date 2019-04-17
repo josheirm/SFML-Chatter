@@ -30,6 +30,7 @@ server * listener_ =  new server;
 int main(int argc, char * argv[]) {
 
 	listener_->copyInputBox(*inputBox);
+	listener_->clientofServer.copyInputBox(*inputBox);
 
 	int gcounter = 1;
 	int g_clientReady = 0;
@@ -97,16 +98,11 @@ int main(int argc, char * argv[]) {
 	while (window.isOpen())
 	{
 
-		
-
-		
-		//const sf::String & tempString = (inputBox->getTextFunct());
-
 		/////////////
-		int value2= (listandReceiveButton->getisStarted());// g_isStarted1;
+		//int value2= (listandReceiveButton->getisStarted());// g_isStarted1;
 		
 		//is client - connecting
-		if ((listandReceiveButton->GETISSERVER() == 0)  && ((listandReceiveButton->getisStarted()) == true))
+		if (g_clientReady == 0 && (listandReceiveButton->GETISSERVER() == 0)  && ((listandReceiveButton->getisStarted()) == true))
 		{	//acer is client only need to change define
 			int flag = 0;
 
@@ -118,12 +114,12 @@ int main(int argc, char * argv[]) {
 			g_clientReady = 1;
 
 			//turns off
-			listandReceiveButton->setisStarted(false);
+			//listandReceiveButton->setisStarted(false);
 		}
 		
 		
 		//is server listening
-		if (listandReceiveButton->GETISSERVER() == 1 && listandReceiveButton->getisStarted() == true)
+		if (g_serverReady == 0 && listandReceiveButton->GETISSERVER() == 1 && listandReceiveButton->getisStarted() == true)
 		{
 			if (listener_->getServerListener().listen(53000) != sf::Socket::Done)
 			{
@@ -135,7 +131,7 @@ int main(int argc, char * argv[]) {
 				// error...
 				std::cout << "error2" << std::endl;
 			}
-			listandReceiveButton->setisStarted(false);
+			//listandReceiveButton->setisStarted(false);
 			g_serverReady = 1;
 		}
 
@@ -152,44 +148,81 @@ int main(int argc, char * argv[]) {
 		if (g_serverReady  && (listandReceiveButton->GETISSERVER() == 1))
 		{
 			listener_->receiveData();
+			
+			
+			/////////// server send :
+			if (inputBox->g_sendTexttoServerFlag )
+			{
+				gcounter++;
+
+				sf::Packet packet;
+
+				const sf::String & tempString = (inputBox->getTextFunct());
+				//tempString = "hi";
+											//tempString->insert("A");
+
+				packet << tempString;
+
 				
+
+
+				
+
+
+
+
+				//if (listener_->clientofServer.socket.send(tempstring, sizeof(tempstring)) != sf::Socket::Done)
+				listener_->socket.send(packet);
+
+				inputBox->g_sendTexttoServerFlag = false;
+
+			}
+
+
+
+			///////////
 				
 			
 		}
 		//////////////
 
+		//client receives a message
 
-		//client sends a test message
-		
-		if (inputBox->g_sendTexttoServerFlag && g_clientReady  && gcounter == 1 && (listandReceiveButton->GETISSERVER() == 0))
+		if (g_clientReady && (listandReceiveButton->GETISSERVER() == 0))
 		{
-			gcounter++;
-			
-			sf::Packet packet;
+			listener_->clientofServer.receiveData();
 
-			const sf::String & tempString  = (inputBox->getTextFunct());
-			//tempString = "hi";
-										//tempString->insert("A");
+			//client sends a test message
 
-			packet << tempString;
-			
-			// do stuff
-			//delete[] cstr;
-			/////////
-				
-			
-			//USE PACKETS HERE!!!!
+			if (inputBox->g_sendTexttoServerFlag)
+			{
+				gcounter++;
+
+				sf::Packet packet;
+
+				const sf::String & tempString = (inputBox->getTextFunct());
+				//tempString = "hi";
+											//tempString->insert("A");
+
+				packet << tempString;
+
+				// do stuff
+				//delete[] cstr;
+				/////////
+
+
+				//USE PACKETS HERE!!!!
 
 
 
-			
-			//if (listener_->clientofServer.socket.send(tempstring, sizeof(tempstring)) != sf::Socket::Done)
-			listener_->clientofServer.socket.send(packet);
 
+				//if (listener_->clientofServer.socket.send(tempstring, sizeof(tempstring)) != sf::Socket::Done)
+				listener_->clientofServer.socket.send(packet);
+
+				inputBox->g_sendTexttoServerFlag = false;
+			}
 
 		}
-			
-		
 
 
 		sf::Event event;

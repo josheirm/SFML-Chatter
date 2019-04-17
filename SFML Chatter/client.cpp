@@ -15,19 +15,27 @@ void client::sendData()
 
 void client::receiveData()
 {
+	sf::String test = "";
+	sf::String &  temp = test;
+
 	// TCP socket:
-	if (socket.receive(data, 5, received) != sf::Socket::Done)
+
+	//!= sf::Socket::Done
+	socket.receive(packet);
+	//{
+	//	std::cout << "error server received"<<std::endl;
+	//}
+	//extract
+	packet >> temp;
+	std::string s1 = temp;
+	if (s1 != "")
 	{
-		std::cout << "failed recieve data\n";
-		// error...
-	}
-	else
-	{
-		std::cout << "data: "<<data<<"\n";
-	}
-	//std::cout << "Received " << received << " bytes" << std::endl;
+		std::cout << ":: " << s1;
 
 
+		clientInputBox.chatBox.addTexttoChatBox(temp);
+	}
+	
 }
 
 sf::TcpSocket& client::getClientSocket()
@@ -48,6 +56,9 @@ void client::getLocalAddress()
 }
 client::client()
 {
+	socket.setBlocking(false);
+
+
 	strcpy_s(data, "test");
 	//input_Box * socket = new input_Box();
 	//data[5] = "test\0";
@@ -64,7 +75,7 @@ client::~client()
 
 int client::clientConnect()
 {
-	//sf::TcpSocket socket;
+	sf::TcpSocket socket;
 	//acer - 3, emachine - 5
 	//sf::Socket::Status status = socket.connect("0.0.0.3", 53000);
 	
@@ -83,4 +94,9 @@ int client::clientConnect()
 		return(1);
 	}
 
+}
+
+void client::copyInputBox(input_Box & copy)
+{
+	clientInputBox = copy;
 }
