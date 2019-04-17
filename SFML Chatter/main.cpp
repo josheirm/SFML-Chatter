@@ -26,7 +26,10 @@ input_Box * inputBox = new input_Box;
 server * listener_ =  new server;
 
 
+
 int main(int argc, char * argv[]) {
+
+	listener_->copyInputBox(*inputBox);
 
 	int gcounter = 1;
 	int g_clientReady = 0;
@@ -101,7 +104,8 @@ int main(int argc, char * argv[]) {
 
 		/////////////
 		int value2= (listandReceiveButton->getisStarted());// g_isStarted1;
-		//is client
+		
+		//is client - connecting
 		if ((listandReceiveButton->GETISSERVER() == 0)  && ((listandReceiveButton->getisStarted()) == true))
 		{	//acer is client only need to change define
 			int flag = 0;
@@ -118,6 +122,7 @@ int main(int argc, char * argv[]) {
 		}
 		
 		
+		//is server listening
 		if (listandReceiveButton->GETISSERVER() == 1 && listandReceiveButton->getisStarted() == true)
 		{
 			if (listener_->getServerListener().listen(53000) != sf::Socket::Done)
@@ -140,21 +145,23 @@ int main(int argc, char * argv[]) {
 
 
 
-
+		
 
 		//////////////
-		//receiveData() - server
-		if (g_serverReady  && g_clientReady && (listandReceiveButton->GETISSERVER() == 1))
+		//receiveData() and send - server
+		if (g_serverReady  && (listandReceiveButton->GETISSERVER() == 1))
 		{
-			//sf::Packet packet;
-			listener_->receiveData(); 
+			listener_->receiveData();
+				
+				
+			
 		}
 		//////////////
 
 
 		//client sends a test message
 		
-		if (g_clientReady  && gcounter == 1 && (listandReceiveButton->GETISSERVER() == 0))
+		if (inputBox->g_sendTexttoServerFlag && g_clientReady  && gcounter == 1 && (listandReceiveButton->GETISSERVER() == 0))
 		{
 			gcounter++;
 			

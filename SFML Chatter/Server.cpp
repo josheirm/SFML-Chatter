@@ -4,6 +4,7 @@
 
 server::server()
 {
+	isMessage = false;
 
 	strcpy_s(data, "zzzz");
 }
@@ -66,9 +67,15 @@ void server::receiveData()
 	std::cout <<":: "<< s1;
 	//std::cout << "recievd passed - is here!";
 	//std::cout << "Received: " << data << std::endl;
-
-
+	isMessage = true;
+	//chatBox->addTexttoChatBox(temp);
+	serverInputBox.chatBox.addTexttoChatBox(temp);
 }
 server::~server()
 {
+}
+
+void server::copyInputBox( input_Box & copy)
+{
+	serverInputBox = copy;
 }

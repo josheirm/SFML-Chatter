@@ -14,7 +14,7 @@ input_Box::input_Box()
 	g_sendTexttoServerFlag = false;
 }
 
-void input_Box::setisMessage(bool value)
+/*void input_Box::setisMessage(bool value)
 {
 	g_sendTexttoServerFlag = value;
 }
@@ -28,7 +28,7 @@ bool input_Box::getisMessage()
 	{
 		return(false);
 	}
-}
+}*/
 
 
 
@@ -109,13 +109,15 @@ int input_Box::buttonPressed()
 	//std::string s1 = tempstring;
 
 	const sf::String   tempstring = getTextFunct();
-	
+	g_sendTexttoServerFlag =true;
+
 	//eraseText();
 	//sf::String::String(tempstring);
 
-
-	chatBox.addTexttoChatBox(tempstring);
+	//workd
+	//chatBox.addTexttoChatBox(tempstring);
 	//g_sendTexttoServerFlag;
+	
 	
 	// addLine();
 	

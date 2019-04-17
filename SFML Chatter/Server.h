@@ -4,11 +4,14 @@
 #include "client.h"
 #include <iostream>
 #include <SFML/Network/Packet.hpp>
-
+#include "inputBox.h"
 class server
 {
 public:
-	
+
+	input_Box serverInputBox;
+	void copyInputBox( input_Box & copy);
+	bool isMessage;
 	client clientofServer;
 	sf::Packet packet;
 	sf::TcpSocket clientsocket;

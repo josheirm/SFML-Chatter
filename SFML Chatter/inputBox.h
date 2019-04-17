@@ -25,8 +25,8 @@ public:
 	ConstPtrTextBox  inputTextBox;
 	chat_Box chatBox;
 
-	bool getisMessage();
-	void setisMessage(bool value);
+	//bool getisMessage();
+	//void setisMessage(bool value);
 
 	bool g_sendTexttoServerFlag;
 	int buttonPressed();
@@ -43,7 +43,7 @@ public:
 	//consider changing this to a reference
 	   const sf::String   getTextFunct();
 	
-
+	   
 	
 	//void eraseText();
 

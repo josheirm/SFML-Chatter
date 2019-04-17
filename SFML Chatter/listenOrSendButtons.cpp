@@ -82,8 +82,8 @@ int listenorSendButtons::setisStarted(bool value)
 	}
 	else
 	{
-		buttonStart->setText("Started");
-		g_isStarted1 = 1;
+		buttonStart->setText("Stopped");
+		g_isStarted1 = false;
 	}
 		return(1);
 
