@@ -1,6 +1,7 @@
 #pragma once
 #include <TGUI/TGUI.hpp>
-// std::shared_ptr<  tgui::Button >PtrButton;
+
+typedef std::shared_ptr<  tgui::Button >PtrButton;
 
 //externed
 
@@ -18,8 +19,8 @@ public:
 	
 	
 	
-	//PtrButton buttonStart;
-	//PtrButton buttonListen;
+	PtrButton buttonStart;
+	PtrButton buttonListen;
 	//tgui::Button button_Listen;
 	//tgui::Button button_Receive;
 	
