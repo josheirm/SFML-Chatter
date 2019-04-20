@@ -126,7 +126,7 @@ int main(int argc, char * argv[]) {
 				std::cout << "error1" << std::endl;
 			}
 
-			if (listener_->getServerListener().accept(listener_->clientofServer.socket) != sf::Socket::Done)
+			if (listener_->getServerListener().accept(listener_->clientofServer.csocket) != sf::Socket::Done)
 			{
 				// error...
 				std::cout << "error2" << std::endl;
@@ -150,39 +150,19 @@ int main(int argc, char * argv[]) {
 			listener_->receiveData();
 			
 			
-			/////////// server send :
-			if (inputBox->g_sendTexttoServerFlag )
-			{
-				gcounter++;
+			///////////// server send :
+			//if (inputBox->g_sendTexttoServerFlag )
+			//{
+			//	gcounter++;
+			//	sf::Packet packet;
+			//	const sf::String & tempString = (inputBox->getTextFunct());
+			//	//tempString = "hi";
+			//	packet << tempString;
+			//	//if (listener_->clientofServer.socket.send(tempstring, sizeof(tempstring)) != sf::Socket::Done)
+			//	listener_->clientofServer.ssocket.send(packet);
+			//	inputBox->g_sendTexttoServerFlag = false;
 
-				sf::Packet packet;
-
-				const sf::String & tempString = (inputBox->getTextFunct());
-				//tempString = "hi";
-											//tempString->insert("A");
-
-				packet << tempString;
-
-				
-
-
-				
-
-
-
-
-				//if (listener_->clientofServer.socket.send(tempstring, sizeof(tempstring)) != sf::Socket::Done)
-				listener_->socket.send(packet);
-
-				inputBox->g_sendTexttoServerFlag = false;
-
-			}
-
-
-
-			///////////
-				
-			
+			//}
 		}
 		//////////////
 
@@ -190,35 +170,23 @@ int main(int argc, char * argv[]) {
 
 		if (g_clientReady && (listandReceiveButton->GETISSERVER() == 0))
 		{
-			listener_->clientofServer.receiveData();
+			//listener_->clientofServer.receiveData();
 
 			//client sends a test message
-
 			if (inputBox->g_sendTexttoServerFlag)
 			{
 				gcounter++;
-
 				sf::Packet packet;
-
 				const sf::String & tempString = (inputBox->getTextFunct());
 				//tempString = "hi";
-											//tempString->insert("A");
-
+				std::string s1 = tempString;
 				packet << tempString;
 
 				// do stuff
 				//delete[] cstr;
 				/////////
-
-
 				//USE PACKETS HERE!!!!
-
-
-
-
-				//if (listener_->clientofServer.socket.send(tempstring, sizeof(tempstring)) != sf::Socket::Done)
-				listener_->clientofServer.socket.send(packet);
-
+				listener_->clientofServer.csocket.send(packet);
 				inputBox->g_sendTexttoServerFlag = false;
 			}
 

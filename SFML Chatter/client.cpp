@@ -7,7 +7,7 @@
 
 void client::sendData()
 {
-	if (socket.send(data, 5) != sf::Socket::Done)
+	if (csocket.send(data, 5) != sf::Socket::Done)
 	{
 		// error...
 	}
@@ -21,7 +21,7 @@ void client::receiveData()
 	// TCP socket:
 
 	//!= sf::Socket::Done
-	socket.receive(packet);
+	csocket.receive(packet);
 	//{
 	//	std::cout << "error server received"<<std::endl;
 	//}
@@ -40,7 +40,7 @@ void client::receiveData()
 
 sf::TcpSocket& client::getClientSocket()
 {
-	return(socket);
+	return(csocket);
 }
 
 
@@ -56,7 +56,7 @@ void client::getLocalAddress()
 }
 client::client()
 {
-	socket.setBlocking(false);
+	csocket.setBlocking(false);
 
 
 	strcpy_s(data, "test");
@@ -66,7 +66,7 @@ client::client()
 
 sf::TcpSocket& client::getSocket()
 {
-	return(socket);
+	return(csocket);
 }
 
 client::~client()
@@ -80,7 +80,7 @@ int client::clientConnect()
 	//sf::Socket::Status status = socket.connect("0.0.0.3", 53000);
 	
 	//connect to server - emachine
-	sf::Socket::Status status = socket.connect("10.0.0.5", 53000);
+	sf::Socket::Status status = csocket.connect("10.0.0.5", 53000);
 	
 	if (status != sf::Socket::Done)
 	{

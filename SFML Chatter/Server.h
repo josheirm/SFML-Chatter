@@ -9,13 +9,13 @@ class server
 {
 public:
 
-	sf::TcpSocket socket;
+	//sf::TcpSocket ssocket;
 	input_Box serverInputBox;
 	void copyInputBox( input_Box & copy);
 	bool isMessage;
 	client clientofServer;
 	sf::Packet packet;
-	sf::TcpSocket clientsocket;
+	//sf::TcpSocket clientsocket;
 
 	std::size_t received;
 	void receiveData();

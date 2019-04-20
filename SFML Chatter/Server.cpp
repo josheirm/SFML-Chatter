@@ -4,7 +4,7 @@
 
 server::server()
 {
-	socket.setBlocking(false);
+	clientofServer.ssocket.setBlocking(false);
 	isMessage = false;
 
 	strcpy_s(data, "zzzz");
@@ -21,7 +21,7 @@ void server::serverListen()
 
 	// accept a new connection
 	//client clientofServer;
-	if (listener.accept(clientsocket) != sf::Socket::Done)
+	if (listener.accept(clientofServer.csocket) != sf::Socket::Done)
 	{
 		// error...
 	}
@@ -41,10 +41,10 @@ client &server::getClientObject()
 
 void server::sendData()
 {
-	if (clientofServer.socket.send(data, 5) != sf::Socket::Done)
-	{
-		// error...
-	}
+	//if (clientofServer.ssocket.send(data, 5) != sf::Socket::Done)
+	//{
+	//	// error...
+	//}
 
 
 }
@@ -55,26 +55,18 @@ void server::receiveData()
 	sf::String test = "";
 	sf::String &  temp = test;
 
-	// TCP socket:
 	
-	//!= sf::Socket::Done
-	socket.receive(packet);
-	//{
-	//	std::cout << "error server received"<<std::endl;
-	//}
-
+	
+	clientofServer.ssocket.receive(packet);
 	//extract
 	packet >>   temp;
 	std::string s1 = temp;
-
+	//std::cout << ":: " << s1<<std::endl;
 	if (s1 != "")
 	{
 		std::cout << ":: " << s1;
-
-
 		isMessage = true;
-
-		serverInputBox.chatBox.addTexttoChatBox(temp);
+		//serverInputBox.chatBox.addTexttoChatBox(temp);
 	}
 	
 }
