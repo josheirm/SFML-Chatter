@@ -9,8 +9,8 @@ class client
 
 public:
 
-	sf::TcpSocket csocket;
-	sf::TcpSocket ssocket;
+	sf::TcpSocket socket;
+	//sf::TcpSocket ssocket;
 	void copyInputBox( input_Box & copy);
 	input_Box clientInputBox;
 	

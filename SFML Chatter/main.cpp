@@ -102,7 +102,7 @@ int main(int argc, char * argv[]) {
 		//int value2= (listandReceiveButton->getisStarted());// g_isStarted1;
 		
 		//is client - connecting
-		if (g_clientReady == 0 && (listandReceiveButton->GETISSERVER() == 0)  && ((listandReceiveButton->getisStarted()) == true))
+		if ( (listandReceiveButton->GETISSERVER() == 0)  && ((listandReceiveButton->getisStarted()) == true))
 		{	//acer is client only need to change define
 			int flag = 0;
 
@@ -114,24 +114,24 @@ int main(int argc, char * argv[]) {
 			g_clientReady = 1;
 
 			//turns off
-			//listandReceiveButton->setisStarted(false);
+			listandReceiveButton->setisStarted(false);
 		}
 		
 		
 		//is server listening
-		if (g_serverReady == 0 && listandReceiveButton->GETISSERVER() == 1 && listandReceiveButton->getisStarted() == true)
+		if ( listandReceiveButton->GETISSERVER() == 1 && listandReceiveButton->getisStarted() == true)
 		{
 			if (listener_->getServerListener().listen(53000) != sf::Socket::Done)
 			{
 				std::cout << "error1" << std::endl;
 			}
 
-			if (listener_->getServerListener().accept(listener_->clientofServer.csocket) != sf::Socket::Done)
+			if (listener_->getServerListener().accept(listener_->clientofServer.socket) != sf::Socket::Done)
 			{
 				// error...
 				std::cout << "error2" << std::endl;
 			}
-			//listandReceiveButton->setisStarted(false);
+			listandReceiveButton->setisStarted(false);
 			g_serverReady = 1;
 		}
 
@@ -168,13 +168,13 @@ int main(int argc, char * argv[]) {
 
 		//client receives a message
 
-		if (g_clientReady && (listandReceiveButton->GETISSERVER() == 0))
+		if (inputBox->g_sendTexttoServerFlag && g_clientReady && gcounter == 1 && (listandReceiveButton->GETISSERVER() == 0))
 		{
 			//listener_->clientofServer.receiveData();
 
 			//client sends a test message
-			if (inputBox->g_sendTexttoServerFlag)
-			{
+			//if (inputBox->g_sendTexttoServerFlag)
+			//{
 				gcounter++;
 				sf::Packet packet;
 				const sf::String & tempString = (inputBox->getTextFunct());
@@ -186,9 +186,9 @@ int main(int argc, char * argv[]) {
 				//delete[] cstr;
 				/////////
 				//USE PACKETS HERE!!!!
-				listener_->clientofServer.csocket.send(packet);
-				inputBox->g_sendTexttoServerFlag = false;
-			}
+				listener_->clientofServer.socket.send(packet);
+				//inputBox->g_sendTexttoServerFlag = false;
+			//}
 
 		}
 
