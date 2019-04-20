@@ -7,6 +7,7 @@ server::server()
 	isMessage = false;
 
 	strcpy_s(data, "zzzz");
+	
 }
 
 void server::serverListen()
@@ -64,12 +65,15 @@ void server::receiveData()
 	//extract
 	packet >>   temp;
 	std::string s1 = temp;
-	std::cout <<":: "<< s1;
-	//std::cout << "recievd passed - is here!";
-	//std::cout << "Received: " << data << std::endl;
-	isMessage = true;
-	//chatBox->addTexttoChatBox(temp);
-	serverInputBox.chatBox.addTexttoChatBox(temp);
+	
+	if (s1 != "")
+	{
+		std::cout << ":: " << s1;
+		isMessage = true;
+		//chatBox->addTexttoChatBox(temp);
+		serverInputBox.chatBox.addTexttoChatBox(temp);
+	}
+	
 }
 server::~server()
 {

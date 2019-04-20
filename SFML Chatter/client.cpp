@@ -48,6 +48,7 @@ void client::getLocalAddress()
 }
 client::client()
 {
+	//socket.setBlocking(false);
 	strcpy_s(data, "test");
 	//input_Box * socket = new input_Box();
 	//data[5] = "test\0";

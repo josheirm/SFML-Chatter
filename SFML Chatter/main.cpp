@@ -148,9 +148,10 @@ int main(int argc, char * argv[]) {
 		
 
 		//////////////
-		//receiveData() and send - server
+		//server receives
 		if (g_serverReady  && (listandReceiveButton->GETISSERVER() == 1))
 		{
+			listener_->clientofServer.socket.setBlocking(false);
 			listener_->receiveData();
 				
 				
@@ -161,9 +162,11 @@ int main(int argc, char * argv[]) {
 
 		//client sends a test message
 		
-		if (inputBox->g_sendTexttoServerFlag && g_clientReady  && gcounter == 1 && (listandReceiveButton->GETISSERVER() == 0))
+		if (inputBox->g_sendTexttoServerFlag && g_clientReady   && (listandReceiveButton->GETISSERVER() == 0))
 		{
-			gcounter++;
+			listener_->clientofServer.socket.setBlocking(false);
+
+			
 			
 			sf::Packet packet;
 
@@ -185,11 +188,58 @@ int main(int argc, char * argv[]) {
 			
 			//if (listener_->clientofServer.socket.send(tempstring, sizeof(tempstring)) != sf::Socket::Done)
 			listener_->clientofServer.socket.send(packet);
-
+			inputBox->g_sendTexttoServerFlag = false;
 
 		}
-			
 		
+
+
+
+		//////////////////////
+		//////////////////////client receive
+		//if (g_clientReady && (listandReceiveButton->GETISSERVER() == 0))
+		//{
+		//	listener_->receiveData();
+
+
+
+		//}
+
+		/////////////////////////
+		/////////////////////////server sends
+
+		//if (inputBox->g_sendTexttoServerFlag && g_serverReady  && gcounter == 1 && (listandReceiveButton->GETISSERVER() == 1))
+		//{
+		//	gcounter++;
+
+		//	sf::Packet packet;
+
+		//	const sf::String & tempString = (inputBox->getTextFunct());
+		//	//tempString = "hi";
+		//								//tempString->insert("A");
+
+		//	packet << tempString;
+
+		//	// do stuff
+		//	//delete[] cstr;
+		//	/////////
+
+
+		//	//USE PACKETS HERE!!!!
+
+
+
+
+		//	//if (listener_->clientofServer.socket.send(tempstring, sizeof(tempstring)) != sf::Socket::Done)
+		//	listener_->clientofServer.socket.send(packet);
+
+
+		//}
+
+
+		///////////////////////
+		///////////////////////
+
 
 
 		sf::Event event;
