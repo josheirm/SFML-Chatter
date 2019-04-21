@@ -9,6 +9,7 @@ class server
 {
 public:
 
+	int g_textColor;
 	input_Box serverInputBox;
 	void copyInputBox( input_Box & copy);
 	bool isMessage;
@@ -17,7 +18,7 @@ public:
 	sf::TcpSocket clientsocket;
 
 	std::size_t received;
-	void receiveData();
+	void receiveData(int textColor);
 	
 	sf::TcpListener listener;
 	sf::TcpListener & getServerListener();

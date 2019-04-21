@@ -41,22 +41,6 @@ int main(int argc, char * argv[]) {
 	
 	//listenorSendButtons * listandReceiveButton = new listenorSendButtons();
 
-
-
-//	if(argc == 2)
-//	{
-//		if (argv[1] == "client")
-//		{
-//			#undef isserver
-//			#define isserver 0
-//		}
-//	}
-
-
-	//char teststring[5];
-	//strcpy_s(teststring, "gggg");
-	//std::cout <<teststring;
-
 	sf::RenderWindow window{ {700, 600}, "Window" };
 	tgui::Gui gui{ window }; // Create the gui and attach it to the window
 
@@ -78,21 +62,12 @@ int main(int argc, char * argv[]) {
 
 
 
-	///listener_->clientofServer.getLocalAddress();
 	
-	
-	//getLocalAddress();
-		// Endless loop that waits for new connections
-	//while (1)
-	//{
-		//sf::TcpSocket client;
-
-
 		//listener_->clientofServer.getLocalAddress();
 
 		
 
-	//}
+	
 
 	while (window.isOpen())
 	{
@@ -115,6 +90,8 @@ int main(int argc, char * argv[]) {
 				flag = listener_->clientofServer.clientConnect();
 				
 			}
+			//client
+			inputBox->chatBox.setColorofText(2);
 			g_clientReady = 1;
 
 			//turns off
@@ -137,6 +114,8 @@ int main(int argc, char * argv[]) {
 			}
 			listandReceiveButton->setisStarted(false);
 			g_serverReady = 1;
+			//server
+			inputBox->chatBox.setColorofText(1);
 		}
 
 
@@ -152,7 +131,7 @@ int main(int argc, char * argv[]) {
 		if (g_serverReady  && (listandReceiveButton->GETISSERVER() == 1))
 		{
 			listener_->clientofServer.socket.setBlocking(false);
-			listener_->receiveData();
+			listener_->receiveData(2);
 				
 				
 			
@@ -200,7 +179,8 @@ int main(int argc, char * argv[]) {
 		if (g_clientReady && (listandReceiveButton->GETISSERVER() == 0))
 		{
 			listener_->clientofServer.socket.setBlocking(false);
-			listener_->receiveData();
+			//1 is blue
+			listener_->receiveData (1);
 
 
 
@@ -217,21 +197,13 @@ int main(int argc, char * argv[]) {
 
 			const sf::String & tempString = (inputBox->getTextFunct());
 			//tempString = "hi";
-										//tempString->insert("A");
+										
 
 			packet << tempString;
 
-			// do stuff
-			//delete[] cstr;
-			/////////
-
-
 			//USE PACKETS HERE!!!!
 
-
-
-
-			//if (listener_->clientofServer.socket.send(tempstring, sizeof(tempstring)) != sf::Socket::Done)
+			
 			listener_->clientofServer.socket.send(packet);
 			inputBox->g_sendTexttoServerFlag = false;
 
@@ -252,16 +224,11 @@ int main(int argc, char * argv[]) {
 			gui.handleEvent(event); // Pass the event to the widgets
 		}
 
-		//int ispressed = inputBox.checkButtonPressed();
-
 		window.clear();
 		gui.draw(); // Draw all widgets
 		window.display();
 
 
-		//moved
-		//window.clear();
-		//gui.draw(); // Draw all widgets
-		//window.display();
+		
 	}
 }

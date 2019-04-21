@@ -60,6 +60,7 @@ void listenorSendButtons::setListen()
 	{
 		buttonListen->setText("You're the Client");
 		g_isListener = false;
+
 		IS_SERVER = 0;
 
 	}

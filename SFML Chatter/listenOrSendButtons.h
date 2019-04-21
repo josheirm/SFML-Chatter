@@ -10,6 +10,7 @@ class listenorSendButtons
 
 	
 public:
+	//int g_textColor;
 	listenorSendButtons();
 	~listenorSendButtons();
 

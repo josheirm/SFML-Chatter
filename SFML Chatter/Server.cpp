@@ -50,7 +50,7 @@ void server::sendData()
 }
 
 
-void server::receiveData()
+void server::receiveData(int textColor)
 {
 	sf::String test = "";
 	sf::String &  temp = test;

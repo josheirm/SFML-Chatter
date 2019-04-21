@@ -111,10 +111,12 @@ int input_Box::buttonPressed()
 	const sf::String   tempstring = getTextFunct();
 	g_sendTexttoServerFlag =true;
 
-	//eraseText();
+	eraseText();
 	//sf::String::String(tempstring);
 
 	//workd
+	
+	
 	chatBox.addTexttoChatBox(tempstring);
 	//g_sendTexttoServerFlag;
 	
